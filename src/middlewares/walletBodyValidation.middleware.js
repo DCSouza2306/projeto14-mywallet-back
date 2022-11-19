@@ -1,22 +1,28 @@
 import { walletSchema } from "../models/walletSchema.js";
+import dayjs from "dayjs";
 
 export async function walletBodyValidation(req, res, next){
     const user = req.user;
 
-    const { value, descritption, type } = req.body;
+    const { value, description, type, date } = req.body;
   
     const newIncomeOrExpense = {
-      email: user.email,
+      name: user.name,
       value,
-      descritption,
+      description,
       type,
-      date: dayjs().format("DD/MM")
+      date
     }
 
-    const {error} = walletSchema.validate(newIncomeOrExpense);
+    const {error} = walletSchema.validate(newIncomeOrExpense, {abortEarly: false});
 
     if(error){
         const errors = error.details.map((detail) => detail.message);
-        return res.status(400).send(errors)
+        console.log("erro ta aqui");
+        return res.status(400).send({message: errors})
     }
+
+    req.incomeOrExpense = newIncomeOrExpense;
+
+    next();
 }

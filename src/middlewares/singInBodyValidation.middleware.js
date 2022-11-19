@@ -6,11 +6,11 @@ export async function signInBodyValidation(req, res, next) {
 
   const userExists = await usersCollection.findOne({ email });
 
-  if (!userExists) return res.sendStatus(401);
+  if (!userExists) return res.status(401).send({message: "Email não cadastrado"});
 
   const passwordValidation = bcrypt.compareSync(password, userExists.password);
 
-  if(!passwordValidation) return res.sendStatus(401);
+  if(!passwordValidation) return res.status(401).send({message: "Senha incorreta"});
 
   req.userSignIn = userExists;
 

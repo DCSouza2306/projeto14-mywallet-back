@@ -10,6 +10,6 @@ router.use(authValidation)
 
 router.get("/wallet", getWallet);
 
-router.post("/wallet",walletBodyValidation, postWallet);
+router.post("/launch",walletBodyValidation, postWallet);
 
 export default router;

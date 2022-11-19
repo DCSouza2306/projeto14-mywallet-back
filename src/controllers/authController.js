@@ -11,8 +11,10 @@ export async function postSignIn(req, res) {
       token,
       userId: user._id,
     });
-
-    res.send({ token });
+    res.send({
+      token,
+      name: user.name,
+    });
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
@@ -29,7 +31,6 @@ export async function postSignUp(req, res) {
       ...newUser,
       password: passwordHash,
     });
-    console.log(user);
     res.sendStatus(201);
   } catch (e) {
     console.log(e);
