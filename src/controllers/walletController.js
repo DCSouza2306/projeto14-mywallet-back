@@ -13,7 +13,7 @@ export async function getWallet(req, res) {
 }
 
 export async function postWallet(req, res) {
-  const newLaunchs = req.La;
+  const newLaunchs = req.Launchs;
   try {
     await walletCollection.insertOne(newLaunchs);
     res.sendStatus(201);
