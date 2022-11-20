@@ -6,7 +6,7 @@ export async function walletBodyValidation(req, res, next){
 
     const { value, description, type, date } = req.body;
   
-    const newIncomeOrExpense = {
+    const newLaunchs = {
       name: user.name,
       value,
       description,
@@ -14,7 +14,7 @@ export async function walletBodyValidation(req, res, next){
       date
     }
 
-    const {error} = walletSchema.validate(newIncomeOrExpense, {abortEarly: false});
+    const {error} = walletSchema.validate(newLaunchs, {abortEarly: false});
 
     if(error){
         const errors = error.details.map((detail) => detail.message);
@@ -22,7 +22,7 @@ export async function walletBodyValidation(req, res, next){
         return res.status(400).send({message: errors})
     }
 
-    req.incomeOrExpense = newIncomeOrExpense;
+    req.Launchs = newLaunchs;
 
     next();
 }

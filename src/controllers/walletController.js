@@ -13,9 +13,9 @@ export async function getWallet(req, res) {
 }
 
 export async function postWallet(req, res) {
-  const newIncomeOrExpense = req.incomeOrExpense;
+  const newLaunchs = req.La;
   try {
-    await walletCollection.insertOne(newIncomeOrExpense);
+    await walletCollection.insertOne(newLaunchs);
     res.sendStatus(201);
   } catch (e) {
     console.log(e);
